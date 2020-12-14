@@ -6,3 +6,4 @@ type power_block_device, dev_type;
 type sec_block_device, dev_type;
 type sns_block_device, dev_type;
 type drm_block_device, dev_type;
+typeattribute system_block_device super_block_device_type;

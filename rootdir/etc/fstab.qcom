@@ -3,10 +3,10 @@
 # You have to check whether device supports A/B update or not.
 
 #<src>                                                               <mnt_point>            <type>   <mnt_flags and options>                                                 <fs_mgr_flags>
-/dev/block/by-name/system                                            /system                 ext4    ro,barrier=1,noatime                                                    wait,slotselect,avb,first_stage_mount
-/dev/block/by-name/vendor                                            /vendor                 ext4    ro,barrier=1,noatime                                                    wait,slotselect,avb,first_stage_mount
+system                                                               /system                 ext4    ro,barrier=1,noatime                                                    wait,slotselect,logical,avb,first_stage_mount
+vendor                                                               /vendor                 ext4    ro,barrier=1,noatime                                                    wait,slotselect,logical,avb,first_stage_mount
 /dev/block/by-name/metadata                                          /metadata               ext4    noatime,nosuid,nodev,noauto_da_alloc,discard,journal_checksum,data=ordered,errors=panic             wait,check,fsverity,formattable,first_stage_mount
-/dev/block/by-name/product                                           /product                ext4    ro,nodev,barrier=1,errors=continue                                      wait,slotselect,avb,first_stage_mount
+product                                                              /product                ext4    ro,barrier=1,noatime                                                    wait,slotselect,logical,avb,first_stage_mount
 /dev/block/by-name/OP                                                /vendor/OP              ext4    ro,noatime,nosuid,nodev,barrier=1,data=ordered,noauto_da_alloc          wait,slotselect,avb,nofail,first_stage_mount
 /dev/block/by-name/drm                                               /mnt/vendor/persist-lg  ext4    noatime,nosuid,nodev,barrier=1,data=ordered,noauto_da_alloc,errors=continue          wait,check,formattable,first_stage_mount
 /dev/block/bootdevice/by-name/userdata                               /data                   f2fs    noatime,nosuid,nodev,discard,reserve_root=32768,resgid=1065,fsync_mode=nobarrier,inlinecrypt        latemount,wait,check,quota,formattable,checkpoint=fs,fileencryption=aes-256-xts:aes-256-cts:v2+inlinecrypt_optimized,metadata_encryption=aes-256-xts,keydirectory=/metadata/vold/metadata_encryption,readahead_size_kb=128

@@ -99,6 +99,7 @@ ro.crypto.metadata_init_delete_all_keys.enabled=true
 dalvik.vm.dex2oat64.enabled=true
 
 # Display
+debug.sf.predict_hwc_composition_strategy=0
 ro.surface_flinger.use_color_management=true
 ro.vendor.display.sensortype=2
 vendor.display.comp_mask=0

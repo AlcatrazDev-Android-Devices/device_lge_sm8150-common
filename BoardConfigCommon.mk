@@ -143,6 +143,9 @@ BOARD_SUPER_PARTITION_SIZE := $(shell expr $(BOARD_SUPER_PARTITION_SYSTEM_DEVICE
 # 4 MiB metadata size
 BOARD_LGE_DYNAMIC_PARTITIONS_SIZE := $(shell expr $(BOARD_SUPER_PARTITION_SIZE) - 4194304 ) # (BOARD_SUPER_PARTITION_SIZE - 4194304)
 
+# Partitions - reserved size
+-include vendor/lineage/config/BoardConfigReservedSize.mk
+
 # Platform
 BOARD_VENDOR := lge
 BOARD_USES_QCOM_HARDWARE := true

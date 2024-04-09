@@ -26,7 +26,7 @@
 
 #include <dlfcn.h>
 
-#define RIL_LIB_NAME "libril-qc-qmi-1.so"
+#define RIL_LIB_NAME "libril-qc-hal-qmi.so"
 
 static const RIL_RadioFunctions* qmiRilFunctions;
 static const struct RIL_Env* ossRilEnv;

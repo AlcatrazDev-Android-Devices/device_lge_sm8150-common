@@ -29,7 +29,7 @@
 #define RIL_LIB_NAME "libril-qc-hal-qmi.so"
 
 static const RIL_RadioFunctions* qmiRilFunctions;
-static const struct RIL_Env* ossRilEnv;
+static const struct RIL_Env* qcRilEnv;
 
 const RIL_RadioFunctions* RIL_Init(const struct RIL_Env* env, int argc, char** argv) {
     RIL_RadioFunctions const* (*qmiRilInit)(const struct RIL_Env* env, int argc, char** argv);
@@ -39,7 +39,7 @@ const RIL_RadioFunctions* RIL_Init(const struct RIL_Env* env, int argc, char** a
     /*
      * Save the RilEnv passed from rild.
      */
-    ossRilEnv = env;
+    qcRilEnv = env;
 
     /*
      * Copy the RilEnv.

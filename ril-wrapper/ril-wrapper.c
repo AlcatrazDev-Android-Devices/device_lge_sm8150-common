@@ -25,20 +25,54 @@
 #include <telephony/ril.h>
 
 #include <dlfcn.h>
+#include <string.h>
+
+#include "radio_hal.h"
 
 #define RIL_LIB_NAME "libril-qc-hal-qmi.so"
+
+#define RIL_UNSOL_LGE_SIGNAL_STRENGTH 1300
 
 static const RIL_RadioFunctions* qmiRilFunctions;
 static const struct RIL_Env* qcRilEnv;
 
-static void onUnsolicitedResponseShim(int unsolResponse, const void *data, size_t datalen) {
-    switch(unsolResponse) {
+static void onUnsolicitedResponseShim(int unsolResponse, const void* data, size_t datalen) {
+    void * shimmedResponseData = NULL;
+    size_t shimmedResponseDataLen;
+
+    switch (unsolResponse) {
+        case RIL_UNSOL_LGE_SIGNAL_STRENGTH: {
+            // Convert to RIL_UNSOL_SIGNAL_STRENGTH so that AOSP understands
+            unsolResponse = RIL_UNSOL_SIGNAL_STRENGTH;
+            Lge_Radio_V2_0_LgeSignalStrength* lgeSignalStrength = (Lge_Radio_V2_0_LgeSignalStrength*)data;
+
+            // Create an AOSP-style SignalStrength and insert needed values.
+            Radio_V1_4_SignalStrength newSignalStrength = {
+                lgeSignalStrength->GW_SignalStrength.GW_SignalStrength,
+                lgeSignalStrength->CDMA_SignalStrength,
+                lgeSignalStrength->EVDO_SignalStrength,
+                lgeSignalStrength->LTE_SignalStrength,
+                lgeSignalStrength->TD_SCDMA_SignalStrength,
+                lgeSignalStrength->WCDMA_SignalStrength,
+                lgeSignalStrength->NR_SignalStrength
+            };
+            shimmedResponseData = malloc(sizeof(Radio_V1_4_SignalStrength));
+            shimmedResponseDataLen = sizeof(Radio_V1_4_SignalStrength);
+            __builtin_memcpy(shimmedResponseData, &newSignalStrength, shimmedResponseDataLen);
+            break;
+        }
         default:
-            goto do_not_handle;
+            shimmedResponseData = malloc(datalen);
+            __builtin_memcpy(shimmedResponseData, data, datalen);
+            shimmedResponseDataLen = datalen;
+            break;
     }
 
-do_not_handle:
-    qcRilEnv->OnUnsolicitedResponse(unsolResponse, data, datalen);
+    // Hand over to qcril with a potentially modified UNSOL.
+    qcRilEnv->OnUnsolicitedResponse(unsolResponse, shimmedResponseData, shimmedResponseDataLen);
+
+    // Clean up our own data pointer
+    free(shimmedResponseData);
 }
 
 const RIL_RadioFunctions* RIL_Init(const struct RIL_Env* env, int argc, char** argv) {

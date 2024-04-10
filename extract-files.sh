@@ -63,6 +63,9 @@ function blob_fixup() {
         vendor/etc/init/vendor.sensors.sscrpcd.rc)
             sed -i 's|class early_hal|class core|g' "${2}"
             ;;
+        vendor/bin/hw/qcrild)
+            "${PATCHELF}" --add-needed libril-wrapper.so "${2}"
+            ;;
     esac
 }
 

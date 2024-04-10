@@ -399,7 +399,8 @@ PRODUCT_PACKAGES += \
     libril \
     librilutils \
     librmnetctl \
-    libxml2
+    libxml2 \
+    libril-wrapper
 
 # Rootdir
 PRODUCT_PACKAGES += \

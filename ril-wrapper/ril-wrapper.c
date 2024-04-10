@@ -31,6 +31,16 @@
 static const RIL_RadioFunctions* qmiRilFunctions;
 static const struct RIL_Env* qcRilEnv;
 
+static void onUnsolicitedResponseShim(int unsolResponse, const void *data, size_t datalen) {
+    switch(unsolResponse) {
+        default:
+            goto do_not_handle;
+    }
+
+do_not_handle:
+    qcRilEnv->OnUnsolicitedResponse(unsolResponse, data, datalen);
+}
+
 const RIL_RadioFunctions* RIL_Init(const struct RIL_Env* env, int argc, char** argv) {
     RIL_RadioFunctions const* (*qmiRilInit)(const struct RIL_Env* env, int argc, char** argv);
     static struct RIL_Env shimmedRilEnv;
@@ -42,9 +52,10 @@ const RIL_RadioFunctions* RIL_Init(const struct RIL_Env* env, int argc, char** a
     qcRilEnv = env;
 
     /*
-     * Copy the RilEnv.
+     * Copy the RilEnv and shim the OnUnsolicitedResponse function.
      */
     shimmedRilEnv = *env;
+    shimmedRilEnv.OnUnsolicitedResponse = onUnsolicitedResponseShim;
 
     /*
      * Open the qmi RIL.

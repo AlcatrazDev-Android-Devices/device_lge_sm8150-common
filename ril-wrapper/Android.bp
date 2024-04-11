@@ -1,0 +1,19 @@
+//
+// Copyright (C) 2024 The LineageOS Project
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+
+cc_library_shared {
+    name: "libril-wrapper",
+    srcs: ["ril-wrapper.c"],
+    shared_libs: [
+        "libcutils",
+        "libdl",
+        "liblog",
+    ],
+    header_libs: [
+        "ril_headers",
+    ],
+    vendor: true,
+}

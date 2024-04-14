@@ -40,8 +40,10 @@ static void onUnsolicitedResponseShim(int unsolResponse, const void* data, size_
     void * shimmedResponseData = NULL;
     size_t shimmedResponseDataLen;
 
+    ALOGE("%s: RECEIVED UNSOL %d\n", __func__, unsolResponse);
     switch (unsolResponse) {
         case RIL_UNSOL_LGE_SIGNAL_STRENGTH: {
+           ALOGE("%s: RECEIVED RIL_UNSOL_LGE_SIGNAL_STRENGTH\n", __func__);
             // Convert to RIL_UNSOL_SIGNAL_STRENGTH so that AOSP understands
             unsolResponse = RIL_UNSOL_SIGNAL_STRENGTH;
             Lge_Radio_V2_0_LgeSignalStrength* lgeSignalStrength = (Lge_Radio_V2_0_LgeSignalStrength*)data;
@@ -80,6 +82,7 @@ const RIL_RadioFunctions* RIL_Init(const struct RIL_Env* env, int argc, char** a
     static struct RIL_Env shimmedRilEnv;
     void* qmiRil;
 
+    ALOGE("%s: STARTING LGE RIL WRAPPER!!!!\n", __func__);
     /*
      * Save the RilEnv passed from rild.
      */

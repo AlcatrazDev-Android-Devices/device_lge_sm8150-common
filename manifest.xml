@@ -143,7 +143,9 @@
         <name>vendor.lge.hardware.radio</name>
         <transport>hwbinder</transport>
         <fqname>@2.0::ILgeRadio/lge_radio</fqname>
+        <fqname>@2.0::ILgeRadio/lge_radio2</fqname>
         <fqname>@2.0::ILgeRadio/radio1_wifi</fqname>
+        <fqname>@2.0::ILgeRadio/radio2_wifi</fqname>
     </hal>
     <hal format="hidl">
         <name>vendor.lge.hardware.vss_ims</name>

@@ -587,6 +587,10 @@ vendor/lib/libmmosal.so
 vendor/lib/libqcodec2.so
 vendor/lib64/libmmosal.so
 
+# Misc
+vendor/lib/libstdc++_vendor.so|17e7d6ad06199a80a5c98ecdd39c480c2af8abad
+vendor/lib64/libstdc++_vendor.so|86278d917706d9f0b96751668d4bdb61941d1f54
+
 # MSM IRQ
 vendor/bin/msm_irqbalance
 vendor/etc/msm_irqbalance.conf

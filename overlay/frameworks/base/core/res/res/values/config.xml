@@ -349,5 +349,7 @@
     <string name="config_wlan_network_service_package">vendor.qti.iwlan</string>
     <!-- Telephony qualified networks service package name to bind to by default. -->
     <string name="config_qualified_networks_service_package">vendor.qti.iwlan</string>
+    <!-- no way, i like it on the left. -->
+    <bool name="def_volume_panel_on_left">true</bool>
 
 </resources>

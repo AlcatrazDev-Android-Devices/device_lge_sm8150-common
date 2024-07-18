@@ -59,7 +59,9 @@ USE_CUSTOM_AUDIO_POLICY := 1
 USE_XML_AUDIO_POLICY_CONF := 1
 
 # Audio - LGE
+ifeq ($(findstring betalm,$(TARGET_PRODUCT)),)
 BOARD_LGE_HAS_HIFI_QUAD_DAC := true
+endif
 ifeq ($(findstring mh2lm,$(TARGET_PRODUCT)),)
 BOARD_LGE_HAS_EXT_AMPLIFIER := true
 endif

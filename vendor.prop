@@ -222,6 +222,9 @@ persist.sys.binary_xml=false
 ro.soc.manufacturer=Qualcomm
 ro.soc.model=SM8150
 
+# Verity
+ro.apk_verity.mode=2
+
 # Voice
 vendor.voice.path.for.pcm.voip=false
 

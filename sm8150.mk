@@ -152,6 +152,9 @@ PRODUCT_PACKAGES += \
     QuadDACPanel \
     vendor.lge.hardware.audio.dac.control@2.0-service.proprietary
 
+# Dexpreopt
+PRODUCT_DEX_PREOPT_DEFAULT_COMPILER_FILTER := speed
+
 # Display
 PRODUCT_PACKAGES += \
     android.hardware.graphics.composer@2.4-service \

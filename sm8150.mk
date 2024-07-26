@@ -119,6 +119,9 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.btconfigstore@2.0.vendor \
     liba2dpoffload
 
+# Bootanim
+TARGET_BOOT_ANIMATION_RES := 1440
+
 # Boot control
 PRODUCT_PACKAGES += \
     android.hardware.boot@1.1-impl-qti \
@@ -199,7 +202,7 @@ PRODUCT_PACKAGES += \
     fastbootd
 
 # Fingerprint
-ifneq ($(filter alphalm alphaplus betalm flashlm flashlmdd,$(shell echo $(TARGET_PRODUCT) | sed 's/^lineage_//')),)
+ifneq ($(filter alphalm alphaplus betalm flashlm flashlmdd,$(shell echo $(TARGET_PRODUCT) | sed 's/^aosp_//')),)
 PRODUCT_PACKAGES += \
     android.hardware.biometrics.fingerprint@2.1-service.lge
 endif
